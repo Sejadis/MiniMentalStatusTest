@@ -1,0 +1,67 @@
+[
+  {
+    "number": 1,
+    "type": "question",
+    "task": "Welchen Tag haben wir heute?",
+    "choices": ["Tag", "Monat", "Jahr", "Wochentag", "Jahreszeit"]
+  },
+  {
+    "number": 2,
+    "type": "question",
+    "task": "Wo sind wir jetzt?",
+    "choices": ["Stadt", "Stadtteil", "Bundesland", "Klinik/ Pflegeheim/ Praxis", "Station/ Stockwerk"],
+  },
+  {
+    "number": 3,
+    "type": "question",
+    "task": "Folgende 3 Gegenstände nennen, dann zur Wiederholung auffordern",
+    "choices": ["Apfel", "Schlüssel", "Ball"]
+  },
+  {
+    "number": 4,
+    "type": "question",
+    "task": "Jeweils 7 von 100 abziehen oder „STUHL“ rückwärts buchstabieren",
+    "choices": ["93 oder „L“", "86 oder „H“", "79 oder „U“", "72 oder „T“", "65 oder „S“"]
+  },
+  {
+    "number": 5,
+    "type": "question",
+    "task": "Was waren die Dinge, die Sie sich vorhin gemerkt haben?",
+    "choices": ["Apfel", "Schlüssel", "Ball"]
+  },
+  {
+    "number": 6,
+    "type": "question",
+    "task": "Die Testperson soll die folgenden zwei Gegenstände benennen",
+    "choices": ["Armbanduhr", "Bleistift/Kugelschreiber"]
+  },
+  {
+    "number": 7,
+    "type": "question",
+    "task": "Die Testperson soll den folgenden Satz nachsprechen; nur ein Versuch ist erlaubt",
+    "choices": ["Kein Wenn und Aber"]
+  },
+  {
+    "number": 8,
+    "type": "question",
+    "task": "Nehmen Sie das Blatt Papier, falten es in der Mitte und lassen es auf den Boden fallen",
+    "choices": ["Nehmen Sie das Blatt Papier", "falten es in der Mitte", "und lassen es auf den Boden fallen"]
+  },
+  {
+    "number": 9,
+    "type": "prompt",
+    "task": "Die Testperson soll den Satz: „Schließen Sie die Augen“ lesen und befolgen",
+    "choices": ["Testperson schließt die Augen"]
+  },
+  {
+  "number": 10,
+  "type": "drawing",
+  "task": "Die Testperson soll einen beliebigen vollständigen Satz aufzuschreiben",
+  "choices": ["Sinnhafter Satz mit Subjekt und Verb ."]
+},  {
+  "number": 11,
+  "type": "drawing-template",
+  "task": "Testperson soll die folgende Zeichnung abzeichnen",
+  "choices": ["Zwei sich an einer Ecke überschneidende 5-Ecke"]
+}
+]
