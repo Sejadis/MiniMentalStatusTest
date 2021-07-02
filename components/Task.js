@@ -16,7 +16,7 @@ const Task = ({task, completeTask, incrementPoints, decrementPoints}) => {
     />
   ));
   return (
-    <View style={{flex: 5}}>
+    <View style={{height: '100%'}}>
       <Text style={styles.task}>{task.task}</Text>
       {choices}
       <View style={{flex: 5, paddingBottom: 10}}>

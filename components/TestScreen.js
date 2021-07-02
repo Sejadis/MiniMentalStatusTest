@@ -5,7 +5,7 @@ import Task from './Task';
 
 const TestScreen = ({navigation}) => {
   const [points, setPoints] = useState(0);
-  const [currentTask, setCurrentTask] = useState(1);
+  const [currentTask, setCurrentTask] = useState(0);
 
   const incrementPoints = () => {
     setPoints(points + 1);
