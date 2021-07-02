@@ -19,23 +19,35 @@ const Task = ({task, completeTask, incrementPoints, decrementPoints}) => {
     <View style={{flex: 5}}>
       <Text style={styles.task}>{task.task}</Text>
       {choices}
-      {task.type.includes('template') && (
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <Image source={require('../data/t11_template_pentagon.png')} />
-        </View>
-      )}
-      {task.type.includes('drawing') && (
-        <View style={{flex: 2}}>
-          <DrawView
-            style={{flex: 1, backgroundColor: '#fff'}}
-            onRef={el => 0}
-            color="#000000"
-            strokeWidth={2}
-            onSaved={res => console.log('Save', res.nativeEvent)}
-            onError={error => console.log('Error', error.nativeEvent)}
-          />
-        </View>
-      )}
+      <View style={{flex: 5, paddingBottom: 10}}>
+        {task.type.includes('template') && (
+          <View
+            style={{
+              height: '25%',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              padding: 10,
+            }}>
+            <Image
+              style={{flex: 1, height: undefined, width: undefined}}
+              source={require('../data/t11_template_pentagon.png')}
+              resizeMode="contain"
+            />
+          </View>
+        )}
+        {task.type.includes('drawing') && (
+          <View style={{flex: 4}}>
+            <DrawView
+              style={{flex: 4, backgroundColor: 'rgba(252,179,117,0.35)'}}
+              onRef={el => 0}
+              color="#000000"
+              strokeWidth={2}
+              onSaved={res => console.log('Save', res.nativeEvent)}
+              onError={error => console.log('Error', error.nativeEvent)}
+            />
+          </View>
+        )}
+      </View>
       <Button
         style={styles.continueButton}
         title="Weiter"
