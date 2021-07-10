@@ -1,6 +1,15 @@
 {
-  "9": "Schwere Demenz",
-  "19": "Mittelschwere Demenz",
-  "26": "Leichte Demenz",
-  "30": "Keine Demenz"
+  "9": {
+    "text": "Schwere Demenz",
+    "color": "#ff0000ff"
+  },
+  "19": {
+    "text": "Mittelschwere Demenz",
+    "color": "#ff8800"},
+  "26": {
+    "text": "Leichte Demenz",
+    "color": "#ffff00ff"},
+  "30": {
+    "text": "Keine Demenz",
+    "color": "#00ff00ff"}
 }

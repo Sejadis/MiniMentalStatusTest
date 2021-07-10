@@ -1,11 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Button, Text, StyleSheet, View, Image} from 'react-native';
+import {Text, StyleSheet, View, Image} from 'react-native';
 import Choice from './Choice';
 import DrawView from 'react-native-draw-view';
 
-const Task = ({task, completeTask, incrementPoints, decrementPoints}) => {
-  const [points, setPoints] = useState(0);
-  const drawRef = useRef(null);
+const Task = ({task, continueButton, incrementPoints, decrementPoints}) => {
   let choices = task.choices.map(choice => (
     <Choice
       style={styles.choices}
@@ -48,11 +45,7 @@ const Task = ({task, completeTask, incrementPoints, decrementPoints}) => {
           </View>
         )}
       </View>
-      <Button
-        style={styles.continueButton}
-        title="Weiter"
-        onPress={() => completeTask()}
-      />
+      {continueButton}
     </View>
   );
 };
@@ -65,11 +58,6 @@ const styles = StyleSheet.create({
   choices: {
     flex: 1,
     fontSize: 20,
-  },
-  continueButton: {
-    flex: 3,
-    fontSize: 18,
-    paddingTop: 15,
   },
 });
 export default Task;
