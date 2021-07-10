@@ -72,7 +72,6 @@ const ResultScreen = ({navigation}) => {
             }}
             selectedValue={pickerSelection}
             onValueChange={(itemValue, itemIndex) => {
-              console.log('changing value 2', itemValue);
               setPickerSelection(itemValue);
             }}
             injectedItems={<Picker.Item label="Alle anzeigen" value={'all'} />}

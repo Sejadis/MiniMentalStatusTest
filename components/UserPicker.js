@@ -12,16 +12,11 @@ const UserPicker = ({style, onValueChange, selectedValue, injectedItems}) => {
       : onValueChange(itemValue, itemIndex);
   };
 
-  console.log('selected Value', selectedValue);
-  console.log('injected items', injectedItems);
-  console.log('on value change ', valueChange);
-  console.log('Selection', selection);
   return (
     <Picker
       selectedValue={selection}
       style={{...style, height: 50}}
       onValueChange={(itemValue, itemIndex) => {
-        console.log('changing value 1');
         valueChange(itemValue, itemIndex);
       }}>
       {selection == undefined ? (
