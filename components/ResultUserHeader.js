@@ -9,7 +9,7 @@ const ResultUserHeader = ({userData}) => {
         justifyContent: 'space-around',
         alignItems: 'center',
         borderBottomWidth: 3,
-        width: '75%',
+        width: '95%',
         paddingTop: 10,
       }}>
       {userData.name == 'all' ? (

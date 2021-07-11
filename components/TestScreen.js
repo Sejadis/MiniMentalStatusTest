@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, View} from 'react-native';
 import taskData from '../data/taskData.json';
 import Task from './Task';
 import UserContext from './UserContext';

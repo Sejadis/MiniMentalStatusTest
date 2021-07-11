@@ -17,17 +17,14 @@ const MainScreen = ({navigation}) => {
   return (
     <View style={styles.main}>
       <Button
-        style={styles.button}
         title={'Test starten'}
         onPress={startTest}
       />
       <Button
-        style={styles.button}
         title={'Mehr Informationen'}
         onPress={showAdditionalInformation}
       />
       <Button
-        style={styles.button}
         title={'Testergebnisse'}
         onPress={showResults}
       />
@@ -57,10 +54,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '50%',
     height: '30%',
-  },
-  button: {
-    width: '50%',
-    padding: 25,
   },
 });
 export default MainScreen;

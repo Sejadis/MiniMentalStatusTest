@@ -5,12 +5,13 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, SectionList, Text, View} from 'react-native';
 import UserPicker from './UserPicker';
 import UserContext from './UserContext';
 import Share from 'react-native-share';
 import ResultUserHeader from './ResultUserHeader';
 import {Picker} from '@react-native-picker/picker';
+import UserResult from './UserResult';
 
 const ResultScreen = ({navigation}) => {
   const [pickerSelection, setPickerSelection] = useState('all');
@@ -81,35 +82,55 @@ const ResultScreen = ({navigation}) => {
     });
   }, [navigation, pickerSelection, shareResults]);
 
-  const getAllResults = () => {
-    const userState = userContext.getFullState();
-    const results = [];
-    Object.keys(userState).forEach(key => {
-      userState[key].results.forEach(result => {
-        results.push(result);
-      });
-    });
-    return results;
-  };
-
-  const userResults =
-    pickerSelection === 'all'
-      ? getAllResults()
-      : userContext.getResultsForUser(pickerSelection);
-  const results = userResults?.map(result => (
-    <View
-      key={result.date}
-      style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-      <Text style={{width: '25%', fontSize: 23}}>Punkte: {result.points}</Text>
-      <Text style={{width: '35%', fontSize: 23}}>Datum: {result.date}</Text>
-    </View>
-  ));
+  const userResults = userContext.getResultsForUser(pickerSelection);
+  const results = userResults?.map(result => <UserResult result={result} />);
 
   const userData = userContext.getUserByName(pickerSelection);
+
+  const getAllResultsList = () => {
+    const userState = userContext.getFullState();
+    let allData = [];
+    Object.keys(userState).forEach(key => {
+      let userData = {
+        user: {
+          name: key,
+          age: userState[key].age,
+          sex: userState[key].sex,
+        },
+        data: [],
+      };
+      userState[key].results.forEach(result => {
+        userData.data.push(result);
+      });
+      allData.push(userData);
+    });
+    return allData;
+  };
+
+  const createList = () => {
+    const Item = item => <UserResult result={item.result} />;
+
+    return (
+      <View style={{height: '100%', width: '85%', alignItems: 'center'}}>
+        <SectionList
+          sections={getAllResultsList()}
+          keyExtractor={(item, index) => item + index}
+          renderItem={({item}) => {
+            return <Item result={item} />;
+          }}
+          renderSectionHeader={({section: {user}}) => (
+            <ResultUserHeader userData={user} />
+          )}
+        />
+      </View>
+    );
+  };
   return (
-    <View style={{alignItems: 'center'}}>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <ResultUserHeader userData={{...userData, name: pickerSelection}} />
-      {results?.length > 0 ? (
+      {pickerSelection === 'all' ? (
+        createList()
+      ) : results?.length > 0 ? (
         results
       ) : (
         <Text style={{fontSize: 23}}>Keine Ergebnisse vorhanden</Text>

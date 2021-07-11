@@ -1,17 +1,10 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
-import evaluationData from '../data/evaluationData.json';
+import getEvaluation from './getEvaluation';
 
 const TestScreen = ({route}) => {
   const points = route.params.points;
-  const getEvaluation = () => {
-    for (let key in evaluationData) {
-      if (points <= key) {
-        return evaluationData[key];
-      }
-    }
-  };
-  const evaluation = getEvaluation();
+  const evaluation = getEvaluation(points);
   console.log(evaluation);
   return (
     <View
