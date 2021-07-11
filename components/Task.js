@@ -1,6 +1,7 @@
 import {Text, StyleSheet, View, Image} from 'react-native';
 import Choice from './Choice';
 import DrawView from 'react-native-draw-view';
+import React from 'react';
 
 const Task = ({task, continueButton, incrementPoints, decrementPoints}) => {
   let choices = task.choices.map(choice => (
@@ -42,6 +43,12 @@ const Task = ({task, continueButton, incrementPoints, decrementPoints}) => {
               onSaved={res => console.log('Save', res.nativeEvent)}
               onError={error => console.log('Error', error.nativeEvent)}
             />
+          </View>
+        )}
+        {task.type == 'prompt' && (
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{fontSize: 55}}>{task.prompt}</Text>
           </View>
         )}
       </View>

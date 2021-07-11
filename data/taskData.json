@@ -50,6 +50,7 @@
   {
     "number": 9,
     "type": "prompt",
+    "prompt": "Schließen Sie die Augen",
     "task": "Die Testperson soll den Satz: „Schließen Sie die Augen“ lesen und befolgen",
     "choices": ["Testperson schließt die Augen"]
   },
