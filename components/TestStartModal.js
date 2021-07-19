@@ -19,10 +19,29 @@ const TestStartModal = ({startTest, closeModal}) => {
     age: undefined,
     sex: 'm',
   });
+  const [isNameUndef, setIsNameUndef] = useState(false);
+  const [isAgeUndef, setIsAgeUndef] = useState(false);
   const addUser = () => {
-    userContext.addUser(newUserState.name, newUserState.age, newUserState.sex);
-    userContext.setCurrentUser(newUserState.name);
-    setNewUserState({});
+    var canAdd = true;
+    if (!Boolean(newUserState.name)) {
+      canAdd = false;
+      setIsNameUndef(true);
+    }
+    if (!Boolean(newUserState.age)) {
+      canAdd = false;
+      setIsAgeUndef(true);
+    }
+    if (canAdd) {
+      userContext.addUser(
+        newUserState.name,
+        newUserState.age,
+        newUserState.sex,
+      );
+      setIsNameUndef(false);
+      setIsAgeUndef(false);
+      userContext.setCurrentUser(newUserState.name);
+      setNewUserState({sex: 'm'});
+    }
   };
   return (
     <View
@@ -63,8 +82,11 @@ const TestStartModal = ({startTest, closeModal}) => {
               <Text style={styles.text}>Name</Text>
               <TextInput
                 value={newUserState.name}
-                style={styles.input}
+                style={isNameUndef ? styles.errorInput : styles.input}
                 onChangeText={text => {
+                  if (text !== undefined) {
+                    setIsNameUndef(false);
+                  }
                   setNewUserState({
                     ...newUserState,
                     name: text,
@@ -76,9 +98,12 @@ const TestStartModal = ({startTest, closeModal}) => {
               <Text style={styles.text}>Alter </Text>
               <TextInput
                 value={newUserState.age}
-                style={styles.input}
+                style={isAgeUndef ? styles.errorInput : styles.input}
                 keyboardType="number-pad"
                 onChangeText={text => {
+                  if (text !== undefined) {
+                    setIsAgeUndef(false);
+                  }
                   setNewUserState({
                     ...newUserState,
                     age: text.replace(/[^0-9]/g, ''),
@@ -142,6 +167,12 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: 'rgb(233,241,255)',
+    width: '50%',
+    borderColor: 'grey',
+    borderWidth: 1,
+  },
+  errorInput: {
+    backgroundColor: 'rgba(255,49,49,0.75)',
     width: '50%',
     borderColor: 'grey',
     borderWidth: 1,

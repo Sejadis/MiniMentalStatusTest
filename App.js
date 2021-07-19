@@ -16,10 +16,11 @@ const Stack = createStackNavigator();
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const [userState, setUserState] = useState({
+  const [userState, setUserState] = useState();
+  /*  {
     test: {age: 27, sex: 'm', results: [{points: 23, date: '123'}]},
     test2: {age: 56, sex: 'm', results: []},
-  });
+  }*/
   const [currentUser, setCurrentUser] = useState(undefined);
 
   const backgroundStyle = {

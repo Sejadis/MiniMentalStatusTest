@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import {Button, Modal, View} from 'react-native';
 import taskData from '../data/taskData.json';
 import Task from './Task';
@@ -18,7 +18,7 @@ const TestScreen = ({navigation}) => {
     setPoints(points - 1);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: 'Aufgabe ' + (currentTask + 1) + ' von ' + taskData.length,
     });
@@ -34,6 +34,7 @@ const TestScreen = ({navigation}) => {
 
   const saveResult = () => {
     const date = new Date().toLocaleString('de-DE');
+    console.log(date);
     if (userContext.currentUser !== undefined) {
       userContext.addResults(userContext.currentUser, points, date);
     }
