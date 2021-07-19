@@ -12,34 +12,42 @@ import Share from 'react-native-share';
 import ResultUserHeader from './ResultUserHeader';
 import {Picker} from '@react-native-picker/picker';
 import UserResult from './UserResult';
+import {Buffer} from 'buffer';
 
 const ResultScreen = ({navigation}) => {
   const [pickerSelection, setPickerSelection] = useState('all');
   const userContext = useContext(UserContext);
   const shareResults = useCallback(async () => {
-    const encodedCSV = btoa(userContext.getCSV());
-    console.log(encodedCSV);
+    const csv = userContext.getCSV();
+    // console.log("csv", csv);
+    // const buffer = new Buffer(csv, 'binary');
+    // console.log("buffer", buffer);
+    // const base64 = buffer.toString('base64');
+    // console.log("base", base64);
+    const encodedCSV = Buffer.from(csv, 'binary').toString('base64'); //btoa(userContext.getCSV());
+    const url = `data:text/csv;base64,${encodedCSV}`;
+    console.log(url);
+    const fileName = 'mmst_result_export';
+    // +
+    // new Date()
+    //   .toLocaleDateString('de-DE', {
+    //     day: '2-digit',
+    //     month: '2-digit',
+    //     year: 'numeric',
+    //   })
+    //   .replace(/\./g, '_');
+    console.log(fileName);
     const options = {
-      title: 'MMST Ergbnisse',
-      url: 'data:text/csv;base64,' + encodedCSV,
-      type: 'text/csv',
-      filename:
-        'mmst_result_export_' +
-        new Date()
-          .toLocaleDateString('de-DE', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          })
-          .replace(/\./g, '_'),
+      url: url,
+      filename: fileName,
     };
 
-    Share.open(options)
+    await Share.open(options)
       .then(res => {
-        console.log(res);
+        console.log('res', res);
       })
       .catch(err => {
-        err && console.log(err);
+        err && console.log('err', err);
       });
   }, [userContext]);
 

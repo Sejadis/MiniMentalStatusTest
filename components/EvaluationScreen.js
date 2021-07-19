@@ -1,11 +1,23 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import getEvaluation from './getEvaluation';
+import {HeaderBackButton} from '@react-navigation/stack';
 
-const TestScreen = ({route}) => {
+const EvaluationScreen = ({navigation, route}) => {
   const points = route.params.points;
   const evaluation = getEvaluation(points);
-  console.log(evaluation);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <HeaderBackButton
+          onPress={() => {
+            navigation.navigate('Main');
+          }}
+        />
+      ),
+    });
+  }, [navigation]);
   return (
     <View
       style={{
@@ -28,4 +40,4 @@ const TestScreen = ({route}) => {
   );
 };
 
-export default TestScreen;
+export default EvaluationScreen;

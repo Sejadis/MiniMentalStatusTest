@@ -15,7 +15,7 @@ const UserPicker = ({style, onValueChange, selectedValue, injectedItems}) => {
   return (
     <Picker
       selectedValue={selection}
-      style={{...style, height: 50}}
+      style={{...style, height: '85%'}}
       onValueChange={(itemValue, itemIndex) => {
         valueChange(itemValue, itemIndex);
       }}>

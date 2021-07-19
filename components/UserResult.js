@@ -3,9 +3,7 @@ import getEvaluation from './getEvaluation';
 import React from 'react';
 
 const UserResult = ({result}) => {
-
   const evaluation = getEvaluation(result.points);
-  console.log(result, evaluation);
   return (
     <View
       key={result.date}
@@ -41,6 +39,5 @@ const UserResult = ({result}) => {
     </View>
   );
 };
-
 
 export default UserResult;

@@ -12,7 +12,7 @@ const convertToCSV = data => {
 };
 
 const addUserData = (user, data) => {
-  var csv = '';
+  let csv = '';
   const values = data[user];
   csv += user + ',';
   csv += values.age + ',';

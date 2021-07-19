@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import React from 'react';
 
 const ResultUserHeader = ({userData}) => {
@@ -13,16 +13,23 @@ const ResultUserHeader = ({userData}) => {
         paddingTop: 10,
       }}>
       {userData.name == 'all' ? (
-        <Text style={{fontSize: 20}}>Alle Ergebnisse</Text>
+        <Text style={styles.text}>Alle Ergebnisse</Text>
       ) : (
         <>
-          <Text style={{fontSize: 20}}>{userData.name}</Text>
-          <Text style={{fontSize: 20}}>{userData.age}</Text>
-          <Text style={{fontSize: 20}}>{userData.sex}</Text>
+          <Text style={styles.text}>{userData.name}</Text>
+          <Text style={styles.text}>{userData.age}</Text>
+          <Text style={styles.text}>{userData.sex}</Text>
         </>
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  }
+})
 
 export default ResultUserHeader;
