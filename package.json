@@ -16,7 +16,6 @@
     "@react-native-picker/picker": "^1.16.3",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
-    "Buffer": "0.0.0",
     "buffer": "^6.0.3",
     "react": "17.0.1",
     "react-native": "0.64.2",
