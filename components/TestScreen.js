@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
-import { Button, Modal, StyleSheet, View } from "react-native";
+import {Button, Modal, StyleSheet, View} from 'react-native';
 import taskData from '../data/taskData.json';
 import Task from './Task';
 import UserContext from './UserContext';
 import TestEndModal from './TestEndModal';
+import formatDate from './dateFormat';
 
 const TestScreen = ({navigation}) => {
   const [points, setPoints] = useState(0);
@@ -33,10 +34,10 @@ const TestScreen = ({navigation}) => {
   };
 
   const saveResult = () => {
-    const date = new Date().toLocaleString('de-DE');
-    console.log(date);
+    const dateString = formatDate(new Date());
+    console.log(dateString);
     if (userContext.currentUser !== undefined) {
-      userContext.addResults(userContext.currentUser, points, date);
+      userContext.addResults(userContext.currentUser, points, dateString);
     }
   };
 
@@ -61,8 +62,7 @@ const TestScreen = ({navigation}) => {
   );
   return (
     <>
-      <View
-        style={styles.container}>
+      <View style={styles.container}>
         <Modal
           transparent={true}
           animationType={'fade'}

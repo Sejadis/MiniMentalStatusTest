@@ -92,13 +92,10 @@ const App: () => Node = () => {
       });
     },
     deleteResults: user => {
-      console.log("user", user);
       if (user === undefined) {
         setUserState({});
       } else {
         const {[user]: removedUser, ...newState} = userState;
-        console.log('old state', userState);
-        console.log('new state', newState);
         deleteKey(user).then(() => {
           setUserState(newState);
           setCurrentUser(undefined);
