@@ -8,6 +8,7 @@ import formatDate from './dateFormat';
 
 const TestScreen = ({navigation}) => {
   const [points, setPoints] = useState(0);
+  const [pointData, setPointData] = useState({totalPoints: 0});
   const [currentTask, setCurrentTask] = useState(0);
   const [showEndModal, setShowEndModal] = useState(false);
   const userContext = useContext(UserContext);
@@ -26,18 +27,32 @@ const TestScreen = ({navigation}) => {
   }, [currentTask, navigation]);
 
   const completeTask = () => {
-    if (currentTask == taskData.length - 1) {
-      navigation.navigate('Evaluation', {points: points});
-    } else {
-      setCurrentTask(currentTask + 1);
-    }
+    saveTaskInfos();
+    setCurrentTask(currentTask + 1);
+  };
+
+  const saveTaskInfos = () => {
+    const totalPoints = pointData.totalPoints + points;
+    const newData = {
+      ...pointData,
+      [currentTask]: points,
+      totalPoints: totalPoints,
+    };
+    console.log(totalPoints, pointData, newData);
+    setPointData(newData);
+    setPoints(0);
+    return newData;
   };
 
   const saveResult = () => {
     const dateString = formatDate(new Date());
-    console.log(dateString);
+    const finalTaskInfos = saveTaskInfos();
     if (userContext.currentUser !== undefined) {
-      userContext.addResults(userContext.currentUser, points, dateString);
+      userContext.addResults(
+        userContext.currentUser,
+        finalTaskInfos,
+        dateString,
+      );
     }
   };
 
