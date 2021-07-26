@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const [userState, setUserState] = useState();
+  const [userState, setUserState] = useState({});
   /*  {
     test: {age: 27, sex: 'm', results: [{points: 23, date: '123'}]},
     test2: {age: 56, sex: 'm', results: []},
@@ -27,21 +27,24 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  useEffect(() => {
-    return () => {
-      storeData();
-    };
-  }, [userState]);
+  const deleteKey = key => AsyncStorage.removeItem(key);
 
-  const storeData = async () => {
-    for (let key in userState) {
-      try {
-        await AsyncStorage.setItem(key, JSON.stringify(userState[key]));
-      } catch (error) {
-        // Error saving data
+  useEffect(() => {
+    console.log('effect', userState);
+    const storeData = async () => {
+      for (let key in userState) {
+        try {
+          console.log('saving', key);
+          AsyncStorage.setItem(key, JSON.stringify(userState[key]));
+        } catch (error) {
+          // Error saving data
+          console.log('error saving data', error);
+        }
       }
-    }
-  };
+    };
+
+    storeData();
+  }, [userState]);
 
   useEffect(() => {
     async function loadData() {
@@ -87,6 +90,20 @@ const App: () => Node = () => {
           [name]: newUserState,
         };
       });
+    },
+    deleteResults: user => {
+      console.log("user", user);
+      if (user === undefined) {
+        setUserState({});
+      } else {
+        const {[user]: removedUser, ...newState} = userState;
+        console.log('old state', userState);
+        console.log('new state', newState);
+        deleteKey(user).then(() => {
+          setUserState(newState);
+          setCurrentUser(undefined);
+        });
+      }
     },
     getUserByName: name => {
       return userState[name];

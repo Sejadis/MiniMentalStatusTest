@@ -19,11 +19,6 @@ const ResultScreen = ({navigation}) => {
   const userContext = useContext(UserContext);
   const shareResults = useCallback(async () => {
     const csv = userContext.getCSV();
-    // console.log("csv", csv);
-    // const buffer = new Buffer(csv, 'binary');
-    // console.log("buffer", buffer);
-    // const base64 = buffer.toString('base64');
-    // console.log("base", base64);
     const encodedCSV = Buffer.from(csv, 'binary').toString('base64'); //btoa(userContext.getCSV());
     const url = `data:text/csv;base64,${encodedCSV}`;
     console.log(url);
@@ -51,11 +46,30 @@ const ResultScreen = ({navigation}) => {
       });
   }, [userContext]);
 
+  useEffect(() => {
+    console.log('selection changed', pickerSelection);
+  }, [pickerSelection]);
+
   useLayoutEffect(() => {
+    const headerButtons = () => (
+      <View>
+        <Button onPress={deleteResults} title="Löschen" />
+        <Button onPress={shareResults} title="Exportieren" />
+      </View>
+    );
+
+    const deleteResults = () => {
+      console.log('picker', pickerSelection);
+      userContext.deleteResults(
+        pickerSelection === 'all' ? undefined : pickerSelection,
+      );
+      setPickerSelection('all');
+    };
+
     navigation.setOptions({
-      headerRight: () => <Button onPress={shareResults} title="Exportieren" />,
+      headerRight: headerButtons,
     });
-  }, [navigation, shareResults]);
+  }, [navigation, shareResults, pickerSelection]);
 
   useEffect(() => {
     return () => {
