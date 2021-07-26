@@ -114,13 +114,15 @@ const TestStartModal = ({startTest, closeModal}) => {
             <Button title={'Neuen Nutzer erstellen'} onPress={addUser} />
           </View>
           <View style={styles.sectionContainer}>
-            <Button
-              title={'Anonym Starten'}
-              onPress={() => {
-                userContext.setCurrentUser(undefined);
-                startTest();
-              }}
-            />
+            <View style={{width: '100%'}}>
+              <Button
+                title={'Anonym Starten'}
+                onPress={() => {
+                  userContext.setCurrentUser(undefined);
+                  startTest();
+                }}
+              />
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -142,15 +144,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     alignSelf: 'center',
+    padding: 15,
   },
   scrollView: {
     width: '100%',
     height: '100%',
   },
   scrollViewContentStyle: {
-    justifyContent: 'space-between',
+    padding: 10,
+    justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+    width: '100%',
   },
   userPicker: {width: '85%'},
   sexPicker: {width: '65%', borderWidth: 1},
@@ -161,7 +166,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 2,
     padding: 15,
-    width: '85%',
+    width: '100%',
   },
   textContainer: {
     flexDirection: 'row',
