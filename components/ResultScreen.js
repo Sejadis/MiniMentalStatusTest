@@ -5,7 +5,7 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react';
-import {Button, SectionList, Text, View} from 'react-native';
+import {Button, SectionList, StyleSheet, Text, View} from 'react-native';
 import UserPicker from './UserPicker';
 import UserContext from './UserContext';
 import Share from 'react-native-share';
@@ -82,17 +82,10 @@ const ResultScreen = ({navigation}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: () => (
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-          }}>
+        <View style={styles.titleContainer}>
           <Text>Ergebnisse </Text>
           <UserPicker
-            style={{
-              width: '40%',
-            }}
+            style={styles.userPicker}
             selectedValue={pickerSelection}
             onValueChange={(itemValue, itemIndex) => {
               setPickerSelection(itemValue);
@@ -133,7 +126,7 @@ const ResultScreen = ({navigation}) => {
     const Item = item => <UserResult result={item.result} />;
 
     return (
-      <View style={{height: '100%', width: '85%', alignItems: 'center'}}>
+      <View style={styles.listContainer}>
         <SectionList
           sections={getAllResultsList()}
           keyExtractor={(item, index) => item + index}
@@ -148,17 +141,30 @@ const ResultScreen = ({navigation}) => {
     );
   };
   return (
-    <View style={{flex: 1, alignItems: 'center'}}>
+    <View style={styles.container}>
       <ResultUserHeader userData={{...userData, name: pickerSelection}} />
       {pickerSelection === 'all' ? (
         createList()
       ) : results?.length > 0 ? (
         results
       ) : (
-        <Text style={{fontSize: 23}}>Keine Ergebnisse vorhanden</Text>
+        <Text style={styles.noResultText}>Keine Ergebnisse vorhanden</Text>
       )}
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  userPicker: {
+    width: '40%',
+  },
+  listContainer: {height: '100%', width: '85%', alignItems: 'center'},
+  container: {flex: 1, alignItems: 'center'},
+  noResultText: {fontSize: 23},
+});
 export default ResultScreen;

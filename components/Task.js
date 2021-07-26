@@ -14,20 +14,14 @@ const Task = ({task, continueButton, incrementPoints, decrementPoints}) => {
     />
   ));
   return (
-    <View style={{height: '100%'}}>
+    <View style={styles.container}>
       <Text style={styles.task}>{task.task}</Text>
       {choices}
-      <View style={{flex: 5, paddingBottom: 10}}>
+      <View style={styles.taskContainer}>
         {task.type.includes('template') && (
-          <View
-            style={{
-              height: '25%',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              padding: 10,
-            }}>
+          <View style={styles.templateImageContainer}>
             <Image
-              style={{flex: 1, height: undefined, width: undefined}}
+              style={styles.templateImage}
               source={require('../data/t11_template_pentagon.png')}
               resizeMode="contain"
             />
@@ -36,7 +30,7 @@ const Task = ({task, continueButton, incrementPoints, decrementPoints}) => {
         {task.type.includes('drawing') && (
           <View style={{flex: 4}}>
             <DrawView
-              style={{flex: 4, backgroundColor: 'rgba(252,179,117,0.35)'}}
+              style={styles.drawView}
               onRef={el => 0}
               color="#000000"
               strokeWidth={2}
@@ -46,9 +40,8 @@ const Task = ({task, continueButton, incrementPoints, decrementPoints}) => {
           </View>
         )}
         {task.type == 'prompt' && (
-          <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 55}}>{task.prompt}</Text>
+          <View style={styles.promptContainer}>
+            <Text style={styles.promptText}>{task.prompt}</Text>
           </View>
         )}
       </View>
@@ -66,5 +59,17 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
   },
+  container: {height: '100%'},
+  taskContainer: {flex: 5, paddingBottom: 10},
+  templateImageContainer: {
+    height: '25%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+  },
+  templateImage: {flex: 1, height: undefined, width: undefined},
+  drawView: {flex: 4, backgroundColor: 'rgba(252,179,117,0.35)'},
+  promptContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  promptText: {fontSize: 55},
 });
 export default Task;

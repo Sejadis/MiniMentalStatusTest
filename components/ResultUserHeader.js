@@ -3,15 +3,7 @@ import React from 'react';
 
 const ResultUserHeader = ({userData}) => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderBottomWidth: 3,
-        width: '95%',
-        paddingTop: 10,
-      }}>
+    <View style={styles.container}>
       {userData.name == 'all' ? (
         <Text style={styles.text}>Alle Ergebnisse</Text>
       ) : (
@@ -26,10 +18,18 @@ const ResultUserHeader = ({userData}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderBottomWidth: 3,
+    width: '95%',
+    paddingTop: 10,
+  },
   text: {
     fontSize: 20,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});
 
 export default ResultUserHeader;

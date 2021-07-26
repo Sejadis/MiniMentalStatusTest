@@ -23,11 +23,11 @@ const TestStartModal = ({startTest, closeModal}) => {
   const [isAgeUndef, setIsAgeUndef] = useState(false);
   const addUser = () => {
     var canAdd = true;
-    if (!Boolean(newUserState.name)) {
+    if (!newUserState.name) {
       canAdd = false;
       setIsNameUndef(true);
     }
-    if (!Boolean(newUserState.age)) {
+    if (!newUserState.age) {
       canAdd = false;
       setIsAgeUndef(true);
     }
@@ -44,28 +44,16 @@ const TestStartModal = ({startTest, closeModal}) => {
     }
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={styles.container}>
       <TouchableOpacity
         style={StyleSheet.absoluteFillObject}
         onPressOut={closeModal}>
-        <View style={{flex: 1, backgroundColor: 'rgba(158,158,158,0.64)'}} />
+        <View style={styles.modalBackground} />
       </TouchableOpacity>
       <View style={styles.modal}>
         <ScrollView
-          style={{
-            width: '100%',
-            height: '100%',
-          }}
-          contentContainerStyle={{
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            alignSelf: 'center',
-          }}>
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContentStyle}>
           <View
             style={{
               ...styles.sectionContainer,
@@ -73,8 +61,7 @@ const TestStartModal = ({startTest, closeModal}) => {
               justifyContent: 'space-around',
               alignItems: 'center',
             }}>
-            {/*<Text style={{flex: 1}}>Nutzer wählen: </Text>*/}
-            <UserPicker style={{width: '85%'}} />
+            <UserPicker style={styles.userPicker} />
             <Button title={'Start'} onPress={startTest} />
           </View>
           <View style={styles.sectionContainer}>
@@ -115,7 +102,7 @@ const TestStartModal = ({startTest, closeModal}) => {
               <Text style={styles.text}>Geschlecht </Text>
               <Picker
                 selectedValue={newUserState.sex}
-                style={{width: '65%', borderWidth: 1}}
+                style={styles.sexPicker}
                 onValueChange={(itemValue, itemIndex) =>
                   setNewUserState({...newUserState, sex: itemValue})
                 }>
@@ -142,6 +129,12 @@ const TestStartModal = ({startTest, closeModal}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalBackground: {flex: 1, backgroundColor: 'rgba(158,158,158,0.64)'},
   modal: {
     width: '75%',
     height: '75%',
@@ -150,6 +143,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
   },
+  scrollView: {
+    width: '100%',
+    height: '100%',
+  },
+  scrollViewContentStyle: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  userPicker: {width: '85%'},
+  sexPicker: {width: '65%', borderWidth: 1},
   background: {position: 'absolute', top: 0, left: 0, right: 0, bottom: 0},
   sectionContainer: {
     flexWrap: 'wrap',

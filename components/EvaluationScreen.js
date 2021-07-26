@@ -1,5 +1,5 @@
-import React, {useLayoutEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import getEvaluation from './getEvaluation';
 import {HeaderBackButton} from '@react-navigation/stack';
 
@@ -19,25 +19,30 @@ const EvaluationScreen = ({navigation, route}) => {
     });
   }, [navigation]);
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text style={{fontSize: 30}}>{points} Punkte</Text>
-      <Text style={{fontSize: 30}}>Die Beurteilung ist: {evaluation.text}</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>{points} Punkte</Text>
+      <Text style={styles.text}>Die Beurteilung ist: {evaluation.text}</Text>
       <View
         style={{
-          width: 100,
-          height: 100,
-          borderRadius: 100 / 2,
+          ...styles.evaluationIndicator,
           backgroundColor: evaluation.color,
         }}
       />
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  text: {fontSize: 30},
+  evaluationIndicator: {
+    width: 100,
+    height: 100,
+    borderRadius: 100 / 2,
+  },
+});
 export default EvaluationScreen;

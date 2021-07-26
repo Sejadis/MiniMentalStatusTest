@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
-import {Button, Modal, View} from 'react-native';
+import { Button, Modal, StyleSheet, View } from "react-native";
 import taskData from '../data/taskData.json';
 import Task from './Task';
 import UserContext from './UserContext';
@@ -51,11 +51,6 @@ const TestScreen = ({navigation}) => {
   };
   const continueButton = (
     <Button
-      style={{
-        flex: 3,
-        fontSize: 18,
-        paddingTop: 15,
-      }}
       title={currentTask == taskData.length - 1 ? 'Test beenden' : 'Weiter'}
       onPress={
         currentTask == taskData.length - 1
@@ -67,10 +62,7 @@ const TestScreen = ({navigation}) => {
   return (
     <>
       <View
-        style={{
-          flex: 1,
-          padding: 15,
-        }}>
+        style={styles.container}>
         <Modal
           transparent={true}
           animationType={'fade'}
@@ -93,4 +85,10 @@ const TestScreen = ({navigation}) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 15,
+  },
+});
 export default TestScreen;

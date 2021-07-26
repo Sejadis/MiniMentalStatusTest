@@ -1,5 +1,5 @@
 const convertToCSV = data => {
-  var csv = 'Name,Age,Sex,Points,Date,Time\n';
+  let csv = 'Name,Age,Sex,Points,Date,Time\n';
   Object.keys(data).forEach(user => {
     data[user].results.forEach(result => {
       csv += addUserData(user, data);

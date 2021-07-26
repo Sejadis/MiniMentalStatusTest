@@ -1,40 +1,13 @@
-import React, {useContext, useState} from 'react';
-import {
-  Button,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  TextInput,
-  ScrollView,
-} from 'react-native';
-import UserContext from './UserContext';
-import UserPicker from './UserPicker';
-import {Picker} from '@react-native-picker/picker';
+import React from 'react';
+import {Button, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const TestEndModal = ({navToEvaluation, navToHome, closeModal}) => {
-  const userContext = useContext(UserContext);
-  const [newUserState, setNewUserState] = useState({
-    name: undefined,
-    age: undefined,
-    sex: 'm',
-  });
-  const addUser = () => {
-    userContext.addUser(newUserState.name, newUserState.age, newUserState.sex);
-    userContext.setCurrentUser(newUserState.name);
-    setNewUserState({});
-  };
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={styles.container}>
       <TouchableOpacity
         style={StyleSheet.absoluteFillObject}
         onPressOut={closeModal}>
-        <View style={{flex: 1, backgroundColor: 'rgba(158,158,158,0.64)'}} />
+        <View style={styles.background} />
       </TouchableOpacity>
       <View style={styles.modal}>
         <Button title={'Startseite'} onPress={navToHome} />
@@ -45,6 +18,12 @@ const TestEndModal = ({navToEvaluation, navToHome, closeModal}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  background: {flex: 1, backgroundColor: 'rgba(158,158,158,0.64)'},
   modal: {
     width: '75%',
     height: '35%',

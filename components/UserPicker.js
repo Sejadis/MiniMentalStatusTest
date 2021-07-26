@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import UserContext from './UserContext';
 import {Picker} from '@react-native-picker/picker';
+import { StyleSheet } from "react-native";
 
 const UserPicker = ({style, onValueChange, selectedValue, injectedItems}) => {
   const userContext = useContext(UserContext);
@@ -15,7 +16,7 @@ const UserPicker = ({style, onValueChange, selectedValue, injectedItems}) => {
   return (
     <Picker
       selectedValue={selection}
-      style={{...style, height: '85%'}}
+      style={{...style, ...styles.picker}}
       onValueChange={(itemValue, itemIndex) => {
         valueChange(itemValue, itemIndex);
       }}>
@@ -35,4 +36,7 @@ const UserPicker = ({style, onValueChange, selectedValue, injectedItems}) => {
   );
 };
 
+const styles = StyleSheet.create({
+  picker: {height: '85%'},
+});
 export default UserPicker;
