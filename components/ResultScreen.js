@@ -19,19 +19,9 @@ const ResultScreen = ({navigation}) => {
   const userContext = useContext(UserContext);
   const shareResults = useCallback(async () => {
     const csv = userContext.getCSV();
-    const encodedCSV = Buffer.from(csv, 'binary').toString('base64'); //btoa(userContext.getCSV());
+    const encodedCSV = Buffer.from(csv, 'binary').toString('base64');
     const url = `data:text/csv;base64,${encodedCSV}`;
-    console.log(url);
     const fileName = 'mmst_result_export';
-    // +
-    // new Date()
-    //   .toLocaleDateString('de-DE', {
-    //     day: '2-digit',
-    //     month: '2-digit',
-    //     year: 'numeric',
-    //   })
-    //   .replace(/\./g, '_');
-    console.log(fileName);
     const options = {
       url: url,
       filename: fileName,
@@ -52,7 +42,7 @@ const ResultScreen = ({navigation}) => {
 
   useLayoutEffect(() => {
     const headerButtons = () => (
-      <View>
+      <View style={styles.headerButtonContainer}>
         <Button onPress={deleteResults} title="Löschen" />
         <Button onPress={shareResults} title="Exportieren" />
       </View>
@@ -155,6 +145,11 @@ const ResultScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  headerButtonContainer: {
+    flexDirection: 'row',
+    padding: 5,
+    justifyContent: 'space-between',
+  },
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
