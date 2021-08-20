@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {UserContextProvider} from './components/UserContext';
 import ResultScreen from './components/ResultScreen';
 import convertToCSV from './components/convertToCSV';
+import MoreInformationScreen from "./components/MoreInformationScreen";
 
 const Stack = createStackNavigator();
 
@@ -144,6 +145,11 @@ const App: () => Node = () => {
             name="Result"
             component={ResultScreen}
             options={{title: 'Ergebnisse'}}
+          />
+          <Stack.Screen
+            name="MoreInformation"
+            component={MoreInformationScreen}
+            options={{title: 'Weitere Informationen'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

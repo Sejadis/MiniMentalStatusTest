@@ -12,22 +12,18 @@ const MainScreen = ({navigation}) => {
     navigation.navigate('Result');
   };
 
-  const showAdditionalInformation = () => {};
+  const showAdditionalInformation = () => {
+    navigation.navigate('MoreInformation');
+  };
 
   return (
     <View style={styles.main}>
-      <Button
-        title={'Test starten'}
-        onPress={startTest}
-      />
+      <Button title={'Test starten'} onPress={startTest} />
       <Button
         title={'Mehr Informationen'}
         onPress={showAdditionalInformation}
       />
-      <Button
-        title={'Testergebnisse'}
-        onPress={showResults}
-      />
+      <Button title={'Testergebnisse'} onPress={showResults} />
       <Modal
         transparent={true}
         animationType={'fade'}

@@ -4,11 +4,11 @@ import DrawView from 'react-native-draw-view';
 import React from 'react';
 
 const Task = ({task, continueButton, incrementPoints, decrementPoints}) => {
-  let choices = task.choices.map(choice => (
+  let choices = task.choices.map((choice, index) => (
     <Choice
       style={styles.choices}
       data={choice}
-      key={choice}
+      key={index + '_' + choice}
       incrementPoints={() => incrementPoints()}
       decrementPoints={() => decrementPoints()}
     />
