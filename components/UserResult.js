@@ -37,10 +37,13 @@ const UserResult = ({result}) => {
             }}
           />
         </View>
-        <Text style={styles.dateDescriptionText}>
-          Datum:
-          <Text style={styles.boldText}> {result.date}</Text>
-        </Text>
+        <View style={{width: '60%'}}>
+          <Text style={styles.dateDescriptionText}>
+            Datum:
+            <Text style={styles.boldText}> {result.date}</Text>
+          </Text>
+        </View>
+
       </View>
       {showDetails && (
         <View style={{flexDirection: 'row', justifyContent: 'space-around', borderWidth: 1, width: '90%'}}>
@@ -56,6 +59,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flex: 1,
   },
   pointContainer: {
     flex: 1,
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pointDescriptionText: {paddingRight: 15, fontSize: 23},
-  dateDescriptionText: {flex: 1, width: '35%', fontSize: 23},
+  dateDescriptionText: {flex: 1, fontSize: 23},
   boldText: {fontWeight: 'bold'},
 });
 export default UserResult;

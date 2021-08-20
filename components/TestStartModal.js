@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   modalBackground: {flex: 1, backgroundColor: 'rgba(158,158,158,0.64)'},
   modal: {
     width: '75%',
-    height: '75%',
+    height: '55%',
     backgroundColor: '#ffffff',
     justifyContent: 'space-around',
     alignItems: 'center',

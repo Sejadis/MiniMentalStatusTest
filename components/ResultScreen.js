@@ -113,8 +113,7 @@ const ResultScreen = ({navigation}) => {
   };
 
   const createList = () => {
-    const Item = item => <UserResult result={item.result} />;
-
+    const Item = item => <UserResult key={item.result.date} result={item.result} />;
     return (
       <View style={styles.listContainer}>
         <SectionList
