@@ -43,10 +43,15 @@ const UserResult = ({result}) => {
             <Text style={styles.boldText}> {result.date}</Text>
           </Text>
         </View>
-
       </View>
       {showDetails && (
-        <View style={{flexDirection: 'row', justifyContent: 'space-around', borderWidth: 1, width: '90%'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            borderWidth: 1,
+            width: '90%',
+          }}>
           {createDetails()}
         </View>
       )}
@@ -59,7 +64,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flex: 1,
   },
   pointContainer: {
     flex: 1,

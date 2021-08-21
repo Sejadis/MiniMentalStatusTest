@@ -16,18 +16,8 @@ import MoreInformationScreen from "./components/MoreInformationScreen";
 const Stack = createStackNavigator();
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
   const [userState, setUserState] = useState({});
-  /*  {
-    test: {age: 27, sex: 'm', results: [{points: 23, date: '123'}]},
-    test2: {age: 56, sex: 'm', results: []},
-  }*/
   const [currentUser, setCurrentUser] = useState(undefined);
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   const deleteKey = key => AsyncStorage.removeItem(key);
 
   useEffect(() => {
@@ -73,15 +63,12 @@ const App: () => Node = () => {
   const context = {
     currentUser: currentUser,
     addUser: (name, age, sex) => {
-      // userEvaluations[name] = {age: age, sex: sex, results: []};
       setUserState(prevState => ({
         ...prevState,
         [name]: {age: age, sex: sex, results: []},
       }));
     },
     addResults: (name, points, date) => {
-      // userEvaluations[name].results.push({points: points, date: date});
-
       setUserState(prevState => {
         let results = prevState[name].results;
         results.push({points: points, date: date});

@@ -5,7 +5,7 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react';
-import {Button, SectionList, StyleSheet, Text, View} from 'react-native';
+import {Alert, Button, SectionList, StyleSheet, Text, View} from 'react-native';
 import UserPicker from './UserPicker';
 import UserContext from './UserContext';
 import Share from 'react-native-share';
@@ -43,10 +43,26 @@ const ResultScreen = ({navigation}) => {
   useLayoutEffect(() => {
     const headerButtons = () => (
       <View style={styles.headerButtonContainer}>
-        <Button onPress={deleteResults} title="Löschen" />
+        <Button onPress={createConfirmationAlert} title="Löschen" />
+        <View style={styles.paddingView} />
         <Button onPress={shareResults} title="Exportieren" />
       </View>
     );
+
+    const createConfirmationAlert = () => {
+      const allMsg = 'Sollen alle Daten gelöscht werden?';
+      const userMsg =
+        'Sollen die Daten für ' + pickerSelection + ' gelöscht werden?';
+      const message = pickerSelection === 'all' ? allMsg : userMsg;
+      Alert.alert('Löschen', message, [
+        {
+          text: 'Abbrechen',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {text: 'Löschen', onPress: () => deleteResults()},
+      ]);
+    };
 
     const deleteResults = () => {
       console.log('picker', pickerSelection);
@@ -88,7 +104,7 @@ const ResultScreen = ({navigation}) => {
   }, [navigation, pickerSelection, shareResults]);
 
   const userResults = userContext.getResultsForUser(pickerSelection);
-  const results = userResults?.map(result => <UserResult result={result} />);
+  const results = userResults?.map(result => <View><UserResult result={result} /></View>);
 
   const userData = userContext.getUserByName(pickerSelection);
 
@@ -113,7 +129,9 @@ const ResultScreen = ({navigation}) => {
   };
 
   const createList = () => {
-    const Item = item => <UserResult key={item.result.date} result={item.result} />;
+    const Item = item => (
+      <UserResult key={item.result.date} result={item.result} />
+    );
     return (
       <View style={styles.listContainer}>
         <SectionList
@@ -156,6 +174,9 @@ const styles = StyleSheet.create({
   },
   userPicker: {
     width: '40%',
+  },
+  paddingView: {
+    width: '5%',
   },
   listContainer: {height: '100%', width: '85%', alignItems: 'center'},
   container: {flex: 1, alignItems: 'center'},
